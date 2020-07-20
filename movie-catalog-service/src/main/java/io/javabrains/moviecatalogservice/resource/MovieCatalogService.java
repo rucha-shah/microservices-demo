@@ -14,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import io.javabrains.moviecatalogservice.module.CatalogItem;
 import io.javabrains.moviecatalogservice.module.Movie;
 import io.javabrains.moviecatalogservice.module.Rating;
+import io.javabrains.moviecatalogservice.module.UserRating;
 
 @RestController
 @RequestMapping("/catalog")
@@ -29,24 +30,28 @@ public class MovieCatalogService {
     @RequestMapping("/{userId}")
     public List<CatalogItem> getCatalogItem(@PathVariable("userId")String userId){
 
-        //RestTemplate restTemplate=new RestTemplate();
-        List<Rating> ratings=Arrays.asList(
-            new Rating("1234",4),
-            new Rating("5678",3)
-        );
+        UserRating ratings=restTemplate.getForObject("http://localhost:8083/ratingsdata/users/"+userId, UserRating.class);
 
-        return ratings.stream().map(rating -> 
+
+        return ratings.getUserRating().stream().map(rating -> 
         {
           Movie movie=restTemplate.getForObject("http://localhost:8082/movies/"+rating.getMovieId(),Movie.class);
-        //    Movie movie=webClientBuilder.build()
-        //             .get()
-        //             .uri("http://localhost:8082/movies/"+rating.getMovieId())
-        //             .retrieve()
-        //             .bodyToMono(Movie.class)
-        //             .block();
            return new CatalogItem(movie.getName(), "Super-Hero Sci-Fi", rating.getRating());
         })
         .collect(Collectors.toList());
 
     }
 }
+
+//WebClient way instead of getForObject
+//WebClient for asynchronous calls
+//getForObject synchronous calls
+ /*   Movie movie=webClientBuilder.build()
+                  .get()
+                  .uri("http://localhost:8082/movies/"+rating.getMovieId())
+                  .retrieve()
+                  .bodyToMono(Movie.class)
+                  */
+
+                  //.block() can be added to make above call synchronous
+       

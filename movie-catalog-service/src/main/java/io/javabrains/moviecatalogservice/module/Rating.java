@@ -40,4 +40,7 @@ public class Rating {
         this.rating = rating;
     }
 
+    public Rating() {
+    }
+
 }

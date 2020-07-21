@@ -9,6 +9,36 @@
             "mainClass": "io.javabrains.discoveryserver.DiscoveryServerApplication",
             "projectName": "discovery-server",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MovieInfoServiceApplication<movie-info-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "io.javabrains.movieinfoservice.MovieInfoServiceApplication",
+            "projectName": "movie-info-service",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-RatingDataServiceApplication<rating-data-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "io.javabrains.ratingdataservice.RatingDataServiceApplication",
+            "projectName": "rating-data-service",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MovieCatalogServiceApplication<movie-catalog-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "io.javabrains.moviecatalogservice.MovieCatalogServiceApplication",
+            "projectName": "movie-catalog-service",
+            "args": ""
         }
     ]
 }
